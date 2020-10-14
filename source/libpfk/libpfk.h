@@ -81,8 +81,8 @@
 # endif
 #endif
 
-#include "libidb.h"
-#include "libith.h"
+#include "libidb/libidb.h"
+#include "libith/libith.h"
 
 //
 // Win32 specific

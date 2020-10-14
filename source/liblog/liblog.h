@@ -55,7 +55,7 @@
 # include "compat/winstring.h"
 #endif
 
-#include "libith.h"
+#include "libith/libith.h"
 #include "export.h"
 
 #define	LLOG_NONE		0

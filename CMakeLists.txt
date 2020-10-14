@@ -27,6 +27,8 @@ add_definitions(-DUNIX)
 include(CheckCSourceCompiles)
 include(CheckLibraryExists)
 
+include_directories(source/)
+
 set(RELVER "4.2.0")
 
 subdirs(
