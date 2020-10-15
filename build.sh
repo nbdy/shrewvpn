@@ -7,4 +7,4 @@ else (cd build; make clean); fi
 
 cd build
 cmake ..
-make -j($nproc)
+make -j $(nproc)
