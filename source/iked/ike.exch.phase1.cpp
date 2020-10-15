@@ -2579,7 +2579,7 @@ long _IKED::phase1_gen_natd( IDB_PH1 * ph1 )
 	// compute the nat discovery
 	// hash for local address
 	//
-
+    ctx_hash = EVP_MD_CTX_new();
 	EVP_DigestInit( ctx_hash, ph1->evp_hash );
 	EVP_DigestUpdate( ctx_hash, ph1->cookies.i, ISAKMP_COOKIE_SIZE );
 	EVP_DigestUpdate( ctx_hash, ph1->cookies.r, ISAKMP_COOKIE_SIZE );

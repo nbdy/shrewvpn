@@ -391,8 +391,7 @@ long _IKED::packet_ike_decrypt( IDB_PH1 * sa, PACKET_IKE & packet, BDATA * iv )
 	// init cipher key and iv
 	//
 
-	EVP_CIPHER_CTX *ctx_cipher;
-	EVP_CIPHER_CTX_init( ctx_cipher );
+	EVP_CIPHER_CTX *ctx_cipher = EVP_CIPHER_CTX_new();
 
 	EVP_CipherInit_ex(
 		ctx_cipher,
@@ -595,8 +594,7 @@ long _IKED::packet_ike_encrypt( IDB_PH1 * sa, PACKET_IKE & packet, BDATA * iv )
 	// encrypt all but header
 	//
 
-	EVP_CIPHER_CTX *ctx_cipher;
-	EVP_CIPHER_CTX_init( ctx_cipher );
+	EVP_CIPHER_CTX *ctx_cipher = EVP_CIPHER_CTX_new();
 
 	EVP_CipherInit_ex(
 		ctx_cipher,

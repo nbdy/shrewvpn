@@ -381,7 +381,7 @@ bool dh_init( long group, DH ** dh_data, long * dh_size )
 	auto *p = BN_new();
 	auto *g = BN_new();
 
-	DH_set0_pqg(dh, p, nullptr, nullptr);
+	DH_set0_pqg(dh, p, nullptr, g);
 	DH_set_length(dh, 0);
 
 	//

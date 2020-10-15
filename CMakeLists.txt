@@ -29,7 +29,7 @@ include(CheckLibraryExists)
 
 include_directories(source/)
 
-set(RELVER "4.2.0")
+set(RELVER "2.2.1")
 
 subdirs(
 	source/iked
@@ -315,7 +315,7 @@ endif( NOT PATH_INC_PFKEYV2 )
 #
 
 OPTION( DEBUG   "include Debug Symbol support" )
-OPTION( NATT    "include NAT Traversal support" )
+OPTION( NATT    "include NAT Traversal support" ON)
 OPTION( LDAP    "include LDAP Authentication support" )
 OPTION( QTGUI   "include Client QT GUI support" )
 OPTION( TESTS   "include library test programs" )
@@ -324,6 +324,8 @@ OPTION( BINDIR  "custom bin install path" )
 OPTION( SBINDIR "custom sbin install path" )
 OPTION( LIBDIR  "custom library install path" )
 OPTION( MANDIR  "custom man page install path" )
+
+
 
 # Debug Symbols Option
 
