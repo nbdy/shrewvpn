@@ -46,7 +46,7 @@
 
 #include <histedit.h>
 
-#include "client.h"
+#include "libike/client.h"
 
 typedef class _IKEC : public _CLIENT
 {

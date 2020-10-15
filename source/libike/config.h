@@ -66,9 +66,9 @@
 # include "compat/winstring.h"
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "libidb.h"
+#include <cstdio>
+#include <cstdlib>
+#include "libidb/libidb.h"
 
 #ifdef WIN32
 # define PATH_DELIM '\\'

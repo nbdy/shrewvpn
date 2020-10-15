@@ -42,8 +42,8 @@
 #ifndef _IKE_H_
 #define _IKE_H_
 
-#include "libidb.h"
-#include "inttypes.h"
+#include "libidb/libidb.h"
+#include <cinttypes>
 
 #define CONF_STRLEN					256
 

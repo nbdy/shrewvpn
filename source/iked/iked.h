@@ -56,7 +56,7 @@
 
 #ifdef UNIX
 # ifdef __linux__
-#  include <signal.h>
+#  include <csignal>
 #  include <pwd.h>
 #  include <grp.h>
 #  include <netdb.h>
@@ -97,17 +97,17 @@
 #endif
 
 #include "version.h"
-#include "libip.h"
-#include "liblog.h"
-#include "libith.h"
-#include "libpfk.h"
-#include "libike.h"
-#include "libidb.h"
-#include "crypto.h"
-#include "ike.h"
-#include "iked.idb.h"
-#include "xauth.h"
-#include "xconf.h"
+#include "libip/libip.h"
+#include "liblog/liblog.h"
+#include "libith/libith.h"
+#include "libpfk/libpfk.h"
+#include "libike/libike.h"
+#include "libidb/libidb.h"
+#include "iked/crypto.h"
+#include "iked/ike.h"
+#include "iked/iked.idb.h"
+#include "iked/xauth.h"
+#include "iked/xconf.h"
 
 //
 // Win32 specific

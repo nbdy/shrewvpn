@@ -54,8 +54,8 @@
 #ifdef UNIX
 # ifdef __linux__
 #  include <unistd.h>
-#  include <string.h>
-#  include <inttypes.h>
+#  include <cstring>
+#  include <cinttypes>
 #  include <sys/socket.h>
 #  include <sys/ioctl.h>
 #  include <arpa/inet.h>
@@ -75,11 +75,11 @@
 
 #endif
 
-#include <stdio.h>
-#include <time.h>
-#include <assert.h>
+#include <cstdio>
+#include <ctime>
+#include <cassert>
 #include "export.h"
-#include "libidb.h"
+#include "libidb/libidb.h"
 
 #define MEDIA_ETHERNET			0x0001
 

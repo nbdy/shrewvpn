@@ -46,7 +46,7 @@
 %{
 
 #include <string>
-#include "iked.h"
+#include "iked/iked.h"
 #include "conf.parse.hpp"
 
 %}

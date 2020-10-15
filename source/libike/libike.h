@@ -61,12 +61,12 @@
 # endif
 #endif
 
-#include <assert.h>
-#include <string.h>
-#include <time.h>
-#include "libidb.h"
-#include "libith.h"
-#include "ike.h"
+#include <cassert>
+#include <cstring>
+#include <ctime>
+#include "libidb/libidb.h"
+#include "libith/libith.h"
+#include "iked/ike.h"
 #include "export.h"
 
 #ifdef WIN32

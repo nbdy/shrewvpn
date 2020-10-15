@@ -48,12 +48,12 @@
 # include <shlobj.h>
 #else
 # include <unistd.h>
-# include <signal.h>
+# include <csignal>
 # include <netdb.h>
 # include <netinet/in.h>
 #endif
 
-# include <string.h>
+# include <cstring>
 
 #include "libike.h"
 #include "config.h"

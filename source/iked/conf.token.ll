@@ -45,7 +45,7 @@
 #include <errno.h>
 #include <limits.h>
 #include <string>
-#include "iked.h"
+#include "iked/iked.h"
 #include "conf.parse.hpp"
 
 #define YY_DECL                                     \

@@ -438,7 +438,7 @@ if( QTGUI )
 	add_definitions( -DQT_THREAD_SUPPORT )
 
 	find_package(
-		Qt4
+		Qt5
 		COMPONENTS QtCore QtGui REQUIRED )
 
 	if( NOT QT_QTGUI_FOUND )
