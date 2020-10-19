@@ -3,7 +3,7 @@
 stuff from the official site does not compile on debian buster, so the source had to be fixed.
 #### what changed?
 idk, sat down for an hour and changed some files so there are no compiler errors anymore, do a diff or something.<br>
-main sources changes are in commits [04dd437c15ad46eff10afbdf2de414d4dc91948b](https://github.com/smthnspcl/sratvpn/commit/04dd437c15ad46eff10afbdf2de414d4dc91948b) and [e3df127638a0b99f0d7e1f166a32596f2e4145ac](https://github.com/smthnspcl/sratvpn/commit/e3df127638a0b99f0d7e1f166a32596f2e4145ac)
+main source changes are in commits [04dd437c15ad46eff10afbdf2de414d4dc91948b](https://github.com/smthnspcl/sratvpn/commit/04dd437c15ad46eff10afbdf2de414d4dc91948b) and [e3df127638a0b99f0d7e1f166a32596f2e4145ac](https://github.com/smthnspcl/sratvpn/commit/e3df127638a0b99f0d7e1f166a32596f2e4145ac)
 #### how to ..
 ##### .. install
 ```shell script
