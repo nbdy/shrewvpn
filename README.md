@@ -17,7 +17,7 @@ make install DESTDIR=shrewvpn
 # or automated
 ./install.sh
 ```
-#####  .. configuring
+#####  .. configuring (if you did not run ./install.sh)
 ```shell script
 sudo cp /usr/local/etc/iked.conf.sample /usr/local/etc/iked.conf
 ```
