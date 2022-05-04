@@ -1,9 +1,8 @@
 ### shrewvpn
 #### why the git repo?
-stuff from the official site does not compile on debian buster, so the source had to be fixed.
+stuff from the [official site](https://www.shrew.net/download/ike) does not compile on debian buster, since it uses OpenSSL 0.9.
 #### what changed?
-idk, sat down for an hour and changed some files so there are no compiler errors anymore, do a diff or something.<br>
-main source changes are in commits [04dd437c15ad46eff10afbdf2de414d4dc91948b](https://github.com/smthnspcl/sratvpn/commit/04dd437c15ad46eff10afbdf2de414d4dc91948b) and [e3df127638a0b99f0d7e1f166a32596f2e4145ac](https://github.com/smthnspcl/sratvpn/commit/e3df127638a0b99f0d7e1f166a32596f2e4145ac)
+main changes are in commits [04dd437c15ad46eff10afbdf2de414d4dc91948b](https://github.com/nbdy/shrewvpn/commit/04dd437c15ad46eff10afbdf2de414d4dc91948b) and [e3df127638a0b99f0d7e1f166a32596f2e4145ac](https://github.com/nbdy/shrewvpn/commit/e3df127638a0b99f0d7e1f166a32596f2e4145ac)
 #### how to ..
 ##### .. install
 ```shell script
@@ -15,9 +14,10 @@ make install
 # or into a directory
 make install DESTDIR=shrewvpn
 # or automated
-./install.sh
+./install-debian.sh
+# ./install-arch.sh
 ```
-#####  .. configuring (if you did not run ./install.sh)
+#####  .. configuring (if you did not run ./install-${YOUR_DIST}.sh)
 ```shell script
 sudo cp /usr/local/etc/iked.conf.sample /usr/local/etc/iked.conf
 ```
@@ -42,5 +42,4 @@ ii : ## : VPN Connect, ver 2.2.1
  -u	connection user name
  -p	connection user password
  -a	auto connect
-
 ```
