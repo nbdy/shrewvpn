@@ -9,7 +9,7 @@
 
 project(sratvpn)
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
@@ -22,7 +22,7 @@ find_package(FLEX 2.5.35)
 # Unix Target Constants
 #
 
-add_definitions(-DUNIX)
+add_definitions(-DUNIX -DOPENSSL_API_COMPAT=0x10100000L)
 
 include(CheckCSourceCompiles)
 include(CheckLibraryExists)

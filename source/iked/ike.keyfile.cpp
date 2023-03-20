@@ -858,8 +858,8 @@ bool prvkey_rsa_load_pem( BDATA & prvkey, FILE * fp, BDATA & pass )
 	if( evp_pkey == NULL )
 		return false;
 
-
-	bool converted = prvkey_rsa_2_bdata( prvkey, EVP_PKEY_get0_RSA(evp_pkey));
+    auto* rsa = const_cast<rsa_st *>(EVP_PKEY_get0_RSA(evp_pkey));
+	bool converted = prvkey_rsa_2_bdata( prvkey, rsa);
 	EVP_PKEY_free( evp_pkey );
 
 	return converted;
@@ -885,7 +885,8 @@ bool prvkey_rsa_load_p12( BDATA & prvkey, FILE * fp, BDATA & pass )
 	if( evp_pkey == NULL )
 		return false;
 
-	bool converted = prvkey_rsa_2_bdata( prvkey, EVP_PKEY_get0_RSA(evp_pkey) );
+    auto* rsa = const_cast<rsa_st *>(EVP_PKEY_get0_RSA(evp_pkey));
+	bool converted = prvkey_rsa_2_bdata( prvkey, rsa );
 	EVP_PKEY_free( evp_pkey );
 
 	return converted;
@@ -941,7 +942,8 @@ bool prvkey_rsa_load_pem( BDATA & prvkey, BDATA & input, BDATA & pass )
 	if( evp_pkey == NULL )
 		return false;
 
-	bool converted = prvkey_rsa_2_bdata( prvkey, EVP_PKEY_get0_RSA(evp_pkey) );
+    auto* rsa = const_cast<rsa_st *>(EVP_PKEY_get0_RSA(evp_pkey));
+	bool converted = prvkey_rsa_2_bdata( prvkey, rsa );
 	EVP_PKEY_free( evp_pkey );
 
 	return converted;
@@ -978,7 +980,8 @@ bool prvkey_rsa_load_p12( BDATA & prvkey, BDATA & input, BDATA & pass )
 	if( evp_pkey == NULL )
 		return false;
 
-	bool converted = prvkey_rsa_2_bdata( prvkey, EVP_PKEY_get0_RSA(evp_pkey));
+    auto* rsa = const_cast<rsa_st *>(EVP_PKEY_get0_RSA(evp_pkey));
+	bool converted = prvkey_rsa_2_bdata( prvkey, rsa);
 	EVP_PKEY_free( evp_pkey );
 
 	return converted;
@@ -1012,7 +1015,8 @@ bool _IKED::pubkey_rsa_read( BDATA & cert, BDATA & pubkey )
 	if( evp_pkey == NULL )
 		return false;
 
-	bool result = pubkey_rsa_2_bdata( pubkey, EVP_PKEY_get0_RSA(evp_pkey));
+    auto* rsa = const_cast<rsa_st *>(EVP_PKEY_get0_RSA(evp_pkey));
+	bool result = pubkey_rsa_2_bdata( pubkey, rsa);
 
 	EVP_PKEY_free( evp_pkey );
 
