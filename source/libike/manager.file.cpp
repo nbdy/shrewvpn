@@ -40,7 +40,7 @@
  */
 
 #include "config.h"
-#include <openssl/evp.h>
+#include "openssl/evp.h"
 #include "openssl/rand.h"
 #include "openssl/hmac.h"
 #include "openssl/sha.h"

@@ -9,8 +9,6 @@
 
 add_definitions( -D PATH_CONF=\\"${PATH_ETC}\\" )
 
-
-
 include_directories(
 	${IKE_SOURCE_DIR}/source
 	${IKE_SOURCE_DIR}/source/iked
@@ -79,11 +77,7 @@ target_link_libraries(
 	pthread )
 
 if( FUNC_LIB_CRYPT )
-
-target_link_libraries(
-	iked
-	crypt )
-
+target_link_libraries(iked crypt)
 endif( FUNC_LIB_CRYPT )
 
 # LDAP support option
@@ -132,18 +126,7 @@ add_custom_command(
 
 # install support
 
-install(
-	TARGETS iked
-	RUNTIME DESTINATION ${PATH_SBIN} )
-
-install(
-	FILES iked.8
-	DESTINATION ${PATH_MAN}/man8 )
-
-install(
-	FILES iked.conf.5
-	DESTINATION ${PATH_MAN}/man5 )
-
-install(
-	FILES iked.conf.sample
-	DESTINATION ${PATH_ETC} )
+install(TARGETS iked RUNTIME DESTINATION ${PATH_SBIN})
+install(FILES iked.8 DESTINATION ${PATH_MAN}/man8)
+install(FILES iked.conf.5 DESTINATION ${PATH_MAN}/man5)
+# install(FILES iked.conf.sample DESTINATION ${PATH_ETC})

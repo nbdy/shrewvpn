@@ -6,17 +6,17 @@
 #        : mgrooms@shrew.net
 #        : Copyright 2012, Shrew Soft Inc
 #
-
-project(sratvpn)
-
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
+project(shrewvpn)
 
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
-find_package(BISON 2.4.1)
-find_package(FLEX 2.5.35)
+find_package(BISON 2.4.1 REQUIRED)
+find_package(FLEX 2.5.35 REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(Threads REQUIRED)
 
 #
 # Unix Target Constants
@@ -31,23 +31,18 @@ include_directories(source/)
 
 set(RELVER "2.2.1")
 
-subdirs(
-	source/iked
-	source/ikec
-	source/libike
-	source/libip
-	source/libidb
-	source/libith
-	source/liblog
-	source/libpfk
-)
+add_subdirectory(source/iked)
+add_subdirectory(source/ikec)
+add_subdirectory(source/libike)
+add_subdirectory(source/libip)
+add_subdirectory(source/libidb)
+add_subdirectory(source/libith)
+add_subdirectory(source/liblog)
+add_subdirectory(source/libpfk)
 
 set(SEARCH_INC /usr/local/include /usr/include)
-
 set(SEARCH_LIB /usr/local/lib /usr/lib)
-
 set(SEARCH_BIN /usr/local/bin /usr/pkg/bin /usr/bin)
-
 set(SEARCH_SYS /usr/local /usr/share /usr)
 
 #
@@ -56,9 +51,7 @@ set(SEARCH_SYS /usr/local /usr/share /usr)
 
 if(APPLE)
 	set(CMAKE_OSX_ARCHITECTURES "x86_64")
-
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated-declarations")
-
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 endif(APPLE)
 
@@ -67,7 +60,7 @@ endif(APPLE)
 #
 
 if(NOT EXISTS ${CMAKE_INSTALL_PREFIX})
-	set(CMAKE_INSTALL_PREFIX "/usr" )
+	set(CMAKE_INSTALL_PREFIX "/usr")
 endif(NOT EXISTS ${CMAKE_INSTALL_PREFIX})
 
 message(STATUS "Using install prefix ${CMAKE_INSTALL_PREFIX} ...")
@@ -76,7 +69,6 @@ message(STATUS "Using install prefix ${CMAKE_INSTALL_PREFIX} ...")
 
 if(ETCDIR)
 	set(PATH_ETC ${ETCDIR})
-
 else(ETCDIR)
 	if(EXISTS ${CMAKE_INSTALL_PREFIX}/etc)
 		set(PATH_ETC "${CMAKE_INSTALL_PREFIX}/etc")
@@ -91,29 +83,29 @@ message(STATUS "Using etc install path ${PATH_ETC} ...")
 
 if(BINDIR)
 	set(PATH_BIN ${BINDIR} )
-else( BINDIR )
-	if( EXISTS ${CMAKE_INSTALL_PREFIX}/bin )
+else(BINDIR)
+	if(EXISTS ${CMAKE_INSTALL_PREFIX}/bin)
 		set(PATH_BIN "${CMAKE_INSTALL_PREFIX}/bin" )
-	else( EXISTS ${CMAKE_INSTALL_PREFIX}/bin )
+	else(EXISTS ${CMAKE_INSTALL_PREFIX}/bin)
 		set(PATH_LIB "/usr/bin" )
-	endif( EXISTS ${CMAKE_INSTALL_PREFIX}/bin )
+	endif(EXISTS ${CMAKE_INSTALL_PREFIX}/bin)
 endif( BINDIR )
 
-message(STATUS "Using bin install path ${PATH_BIN} ..." )
+message(STATUS "Using bin install path ${PATH_BIN} ...")
 
 # sbin install path
 
-if( SBINDIR )
-	set(PATH_SBIN ${SBINDIR} )
-else( SBINDIR )
-	if( EXISTS ${CMAKE_INSTALL_PREFIX}/sbin )
+if(SBINDIR)
+	set(PATH_SBIN ${SBINDIR})
+else(SBINDIR)
+	if(EXISTS ${CMAKE_INSTALL_PREFIX}/sbin)
 		set(PATH_SBIN "${CMAKE_INSTALL_PREFIX}/sbin" )
-	else( EXISTS ${CMAKE_INSTALL_PREFIX}/sbin )
+	else(EXISTS ${CMAKE_INSTALL_PREFIX}/sbin)
 		set(PATH_SBIN "/usr/sbin" )
-	endif( EXISTS ${CMAKE_INSTALL_PREFIX}/sbin )
-endif( SBINDIR )
+	endif(EXISTS ${CMAKE_INSTALL_PREFIX}/sbin)
+endif(SBINDIR)
 
-message(STATUS "Using sbin install path ${PATH_SBIN} ..." )
+message(STATUS "Using sbin install path ${PATH_SBIN} ...")
 
 # lib install path
 
@@ -142,104 +134,16 @@ else( MANDIR )
 	endif( PATH_MAN )
 endif( MANDIR )
 
-message(STATUS "Using man install path ${PATH_MAN} ..." )
+message(STATUS "Using man install path ${PATH_MAN} ...")
 
-if( KRNINC )
+if(KRNINC)
+	set(INC_KERNEL_DIR ${KRNINC} )
+	message(STATUS "Using kernel include path ${INC_KERNEL_DIR} ...")
+endif(KRNINC)
 
-	set(
-		INC_KERNEL_DIR ${KRNINC} )
-
-	message(
-		STATUS
-		"Using kernel include path ${INC_KERNEL_DIR} ..." )
-
-endif( KRNINC )
-
-#
-# PreRequisite Checks
-#
-
-check_library_exists(
-	"crypt"
-	"crypt"
-	""
-	FUNC_LIB_CRYPT )
-
-find_path(
-	PATH_INC_CRYPTO
-	NAMES "openssl/evp.h"
-	PATHS ${SEARCH_INC} )
-
-if( NOT PATH_INC_CRYPTO )
-
-	message(
-		FATAL_ERROR
-		"Unable to locate openssl crypto include files" )
-
-endif( NOT PATH_INC_CRYPTO )
-
-find_library(
-	PATH_LIB_CRYPTO
-	NAMES "crypto"
-	PATHS ${SEARCH_LIB} )
-
-if( NOT PATH_LIB_CRYPTO )
-
-	message(
-		FATAL_ERROR
-		"Unable to locate openssl crypto library file" )
-
-endif( NOT PATH_LIB_CRYPTO )
-
-find_path(
-	PATH_INC_EDIT
-	NAMES "histedit.h"
-	PATHS ${SEARCH_INC} )
-
-if( NOT PATH_INC_EDIT )
-
-	message(
-		FATAL_ERROR
-		"Unable to locate libedit include files" )
-
-endif( NOT PATH_INC_EDIT )
-
-find_library(
-	PATH_LIB_EDIT
-	NAMES "edit"
-	PATHS ${SEARCH_LIB} )
-
-if( NOT PATH_LIB_EDIT )
-
-	message(
-		FATAL_ERROR
-		"Unable to locate libedit library file" )
-
-endif( NOT PATH_LIB_EDIT )
-
-find_package(Threads)
-
-message(
-	STATUS
-	"Using library ${CMAKE_THREAD_LIBS_INIT}" )
-
-if( NOT CMAKE_USE_PTHREADS_INIT )
-
-	message(
-		FATAL_ERROR
-		"Unable to locate required package : pthreads" )
-
-endif( NOT CMAKE_USE_PTHREADS_INIT )
-
-if( NOT APPLE )
-	find_package(Threads)
-endif( NOT APPLE )
-
-if( FUNC_LIB_TIMEDLOCK )
-
-	add_definitions( -DOPT_TIMEDLOCK )
-
-endif( FUNC_LIB_TIMEDLOCK )
+if(FUNC_LIB_TIMEDLOCK)
+	add_definitions( -DOPT_TIMEDLOCK)
+endif(FUNC_LIB_TIMEDLOCK)
 
 find_program(
 	PATH_BIN_FLEX
@@ -308,33 +212,27 @@ endif( NOT PATH_INC_PFKEYV2 )
 # Build Option Checks
 #
 
-OPTION( DEBUG   "include Debug Symbol support" )
-OPTION( NATT    "include NAT Traversal support" ON)
-OPTION( LDAP    "include LDAP Authentication support" )
-OPTION( QTGUI   "include Client QT GUI support" )
-OPTION( TESTS   "include library test programs" )
-OPTION( ETCDIR  "custom etc install path" )
-OPTION( BINDIR  "custom bin install path" )
-OPTION( SBINDIR "custom sbin install path" )
-OPTION( LIBDIR  "custom library install path" )
-OPTION( MANDIR  "custom man page install path" )
-
-
+OPTION(DEBUG   "include Debug Symbol support")
+OPTION(NATT    "include NAT Traversal support" ON)
+OPTION(LDAP    "include LDAP Authentication support")
+OPTION(QTGUI   "include Client QT GUI support")
+OPTION(TESTS   "include library test programs")
+OPTION(ETCDIR  "custom etc install path")
+OPTION(BINDIR  "custom bin install path")
+OPTION(SBINDIR "custom sbin install path")
+OPTION(LIBDIR  "custom library install path")
+OPTION(MANDIR  "custom man page install path")
 
 # Debug Symbols Option
 
-if( DEBUG )
-
+if(DEBUG)
 	add_definitions( -g )
-
-endif( DEBUG )
+endif(DEBUG)
 
 # NAT Traversion option
 
 if( NATT )
-
 	if( NOT APPLE )
-
 		check_c_source_compiles(
 			"
 			#ifdef __linux__
@@ -354,28 +252,17 @@ if( NATT )
 			NATT_FOUND )
 
 	else( NOT APPLE )
-
-		set(
-			NATT_FOUND TRUE )
-
+		set(NATT_FOUND TRUE)
 	endif( NOT APPLE )
 
 	if( NOT NATT_FOUND )
-
-		message(
-			FATAL_ERROR
-			"Unable to locate required NAT-T pfkey structures" )
-
+		message(FATAL_ERROR "Unable to locate required NAT-T pfkey structures")
 	endif( NOT NATT_FOUND )
 
 	# success
 
-	message(
-		STATUS 
-		"Enabled NAT Traversal support ..." )
-
+	message(STATUS "Enabled NAT Traversal support ...")
 	add_definitions( -DOPT_NATT )
-
 endif( NATT )
 
 # LDAP support option
